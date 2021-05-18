@@ -30,7 +30,7 @@ namespace GenericServicePattern.Models
 
         public Car GetCar(CarQuery query)
         {
-            throw new NotImplementedException();
+            return (Car)GetCarRequester.Execute(query);
         }
     }
 }

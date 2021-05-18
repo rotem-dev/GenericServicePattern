@@ -21,12 +21,12 @@ namespace GenericServicePattern.Models
 
         public bool FixCar(Car car)
         {
-            throw new NotImplementedException();
+            return (bool)FixCarRequester.Execute(car);
         }
 
         public Car GetCar(CarQuery query)
         {
-            throw new NotImplementedException();
+            return (Car)GetCarRequester.Execute(query);
         }
     }
 }
