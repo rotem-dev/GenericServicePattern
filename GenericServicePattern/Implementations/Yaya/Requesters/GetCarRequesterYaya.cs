@@ -1,17 +1,19 @@
-﻿using GenericServicePattern.Interfaces;
+﻿using GenericServicePattern.Implementations.Clients;
+using GenericServicePattern.Interfaces;
+using GenericServicePattern.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenericServicePattern.Models
+namespace GenericServicePattern.Implementations.Yaya.Requesters
 {
-    public class GetCarRequesterWcf : IRequester<Car, CarQuery, IServiceClient<SomeWcfSoapClient>>
+    public class GetCarRequesterYaya : IRequester<Car, CarQuery, IServiceClient<SomeWcfSoapClient>>
     {
         public IServiceClient<SomeWcfSoapClient> Service { get; private set; }
 
-        public GetCarRequesterWcf()
+        public GetCarRequesterYaya()
         {
             Service = new ServiceClientWcf();
         }

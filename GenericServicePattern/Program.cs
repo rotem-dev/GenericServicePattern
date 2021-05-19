@@ -1,4 +1,6 @@
-﻿using GenericServicePattern.Models;
+﻿using GenericServicePattern.Implementations.Amadeus;
+using GenericServicePattern.Implementations.Yaya;
+using GenericServicePattern.Models;
 using System;
 
 namespace GenericServicePattern

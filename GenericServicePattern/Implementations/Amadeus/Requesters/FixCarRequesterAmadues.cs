@@ -1,4 +1,5 @@
 ﻿using GenericServicePattern.Interfaces;
+using GenericServicePattern.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,13 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenericServicePattern.Models
+namespace GenericServicePattern.Implementations.Amadeus.Requesters
 {
-    public class FixCarRequester : IRequester<bool, Car, IServiceClient<HttpClient>>
+    public class FixCarRequesterAmadues : IRequester<bool, Car, IServiceClient<HttpClient>>
     {
         public IServiceClient<HttpClient> Service { get; private set; }
 
-        public FixCarRequester(IServiceClient<HttpClient> service)
+        public FixCarRequesterAmadues(IServiceClient<HttpClient> service)
         {
             Service = service;
         }

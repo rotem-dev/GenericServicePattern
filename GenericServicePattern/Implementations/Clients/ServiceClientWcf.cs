@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenericServicePattern
+namespace GenericServicePattern.Implementations.Clients
 {
     public class ServiceClientWcf : IServiceClient<SomeWcfSoapClient>
     {
