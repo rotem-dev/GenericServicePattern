@@ -11,6 +11,11 @@ namespace GenericServicePattern.Models
     {
         public IServiceClient<SomeWcfSoapClient> Service { get; private set; }
 
+        public GetCarRequesterWcf()
+        {
+            Service = new ServiceClientWcf();
+        }
+
         public CarQuery ConvertRequest(object request)
         {
             // Some Conversions
