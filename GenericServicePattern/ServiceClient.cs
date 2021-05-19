@@ -14,11 +14,6 @@ namespace GenericServicePattern
 
         object IServiceClient.Client => Client;
 
-        public object SendRequest(object request)
-        {
-            return "some baa blabl a";
-        }
-
         public ServiceClientHttpClient()
         {
             Client = new HttpClient();
