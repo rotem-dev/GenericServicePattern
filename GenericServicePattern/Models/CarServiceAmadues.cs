@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace GenericServicePattern.Models
 {
-    public class CarService : ICarService<IServiceClient<HttpClient>>
+    public class CarServiceAmadues : ICarService<IServiceClient<HttpClient>>
     {
        
 
-        public CarService()
+        public CarServiceAmadues()
         {
             var service = new ServiceClientHttpClient();
             FixCarRequester = new FixCarRequester(service);

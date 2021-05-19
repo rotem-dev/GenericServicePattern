@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GenericServicePattern.Models
 {
-    public class CarServiceWcf : ICarService<IServiceClient<SomeWcfSoapClient>>
+    public class CarServiceYaya : ICarService<IServiceClient<SomeWcfSoapClient>>
     {
-        public CarServiceWcf()
+        public CarServiceYaya()
         {
             FixCarRequester = new FixCarRequesterWcf();
             GetCarRequester = new GetCarRequesterWcf();

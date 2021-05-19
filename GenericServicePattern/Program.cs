@@ -7,10 +7,10 @@ namespace GenericServicePattern
     {
         static void Main(string[] args)
         {
-            CarService carsService = new CarService();
+            CarServiceAmadues carsService = new CarServiceAmadues();
             carsService.GetCar(new CarQuery { Id = 4, SearchString = "lalal" });
 
-            CarServiceWcf wcf = new CarServiceWcf();
+            CarServiceYaya wcf = new CarServiceYaya();
             wcf.FixCar(new Car { CarName = "Boten" });
         }
     }
