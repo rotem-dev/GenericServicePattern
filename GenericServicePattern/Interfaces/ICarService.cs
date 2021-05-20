@@ -7,23 +7,6 @@ using System.Threading.Tasks;
 
 namespace GenericServicePattern.Interfaces
 {
-
-    public abstract class CarService<T> : ICarService where T: IServiceClient
-    {
-        protected Requester<bool, Car, T> FixCarRequester { get; set; }
-        protected Requester<Car, CarQuery, T> GetCarRequester { get; set; }
-
-        public virtual bool FixCar(Car car)
-        {
-            return FixCarRequester.Execute(car);
-        }
-
-        public virtual Car GetCar(CarQuery query)
-        {
-            return GetCarRequester.Execute(query);
-        }
-    }
-
     public interface ICarService : IGetCar, IFixCar
     {
 

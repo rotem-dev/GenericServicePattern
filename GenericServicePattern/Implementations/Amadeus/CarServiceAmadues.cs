@@ -1,4 +1,5 @@
-﻿using GenericServicePattern.Implementations.Amadeus.Requesters;
+﻿using GenericServicePattern.Abstracts;
+using GenericServicePattern.Implementations.Amadeus.Requesters;
 using GenericServicePattern.Implementations.Clients;
 using GenericServicePattern.Interfaces;
 using GenericServicePattern.Models;

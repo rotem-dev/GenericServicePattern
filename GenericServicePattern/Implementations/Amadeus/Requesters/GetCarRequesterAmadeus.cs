@@ -1,4 +1,5 @@
-﻿using GenericServicePattern.Interfaces;
+﻿using GenericServicePattern.Abstracts;
+using GenericServicePattern.Interfaces;
 using GenericServicePattern.Models;
 using System;
 using System.Collections.Generic;

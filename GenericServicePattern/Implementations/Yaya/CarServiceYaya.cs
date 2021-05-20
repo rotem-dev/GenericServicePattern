@@ -1,4 +1,5 @@
-﻿using GenericServicePattern.Implementations.Clients;
+﻿using GenericServicePattern.Abstracts;
+using GenericServicePattern.Implementations.Clients;
 using GenericServicePattern.Implementations.Yaya.Requesters;
 using GenericServicePattern.Interfaces;
 using GenericServicePattern.Models;
