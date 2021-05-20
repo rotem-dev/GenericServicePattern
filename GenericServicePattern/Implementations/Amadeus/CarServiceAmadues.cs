@@ -11,29 +11,13 @@ using System.Threading.Tasks;
 
 namespace GenericServicePattern.Implementations.Amadeus
 {
-    public class CarServiceAmadues : ICarService<IServiceClient<HttpClient>>
+    public class CarServiceAmadues : CarService<IServiceClient<HttpClient>>
     {
-       
-
         public CarServiceAmadues()
         {
             var service = new ServiceClientHttpClient();
             FixCarRequester = new FixCarRequesterAmadues(service);
             GetCarRequester = new GetCarRequesterAmadeus(service);
-        }
-
-        public IRequester<bool, Car, IServiceClient<HttpClient>> FixCarRequester { get; private set; }
-
-        public IRequester<Car, CarQuery, IServiceClient<HttpClient>> GetCarRequester { get; private set; }
-
-        public bool FixCar(Car car)
-        {
-            return (bool)FixCarRequester.Execute(car);
-        }
-
-        public Car GetCar(CarQuery query)
-        {
-            return (Car)GetCarRequester.Execute(query);
         }
     }
 }

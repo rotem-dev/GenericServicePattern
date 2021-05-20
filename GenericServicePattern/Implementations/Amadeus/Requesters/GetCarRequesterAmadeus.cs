@@ -9,32 +9,36 @@ using System.Threading.Tasks;
 
 namespace GenericServicePattern.Implementations.Amadeus.Requesters
 {
-    public class GetCarRequesterAmadeus : IRequester<Car, CarQuery, IServiceClient<HttpClient>>
+    public class GetCarRequesterAmadeus : Requester<Car, CarQuery, IServiceClient<HttpClient>>
     {
-        public IServiceClient<HttpClient> Service { get; private set; }
-
         public GetCarRequesterAmadeus(IServiceClient<HttpClient> service)
         {
             Service = service;
         }
 
-        public CarQuery ConvertRequest(object request)
+        protected override object ConvertRequest(CarQuery request)
         {
-            CarQuery query = new CarQuery();
+            GetCarAmaduesRequest query = new();
+            //query.Car1 = request.SearchString;
             // Get something from RawRequet and convert it to CarQuery
             return query;
         }
 
-        public Car ConvertResponse(object response)
+        protected override Car ConvertResponse(object response)
         {
-            Car c = new Car();
+            Car c = new();
             // Convert from object Raw response and return Car.
+            //c.Id = response.SomeNumber1;
             return c;
         }
 
-        public object Execute(object request)
+        public override Car Execute(CarQuery request)
         {
-            return ConvertResponse(Service.Client.PostAsync("url", new StringContent(ConvertRequest(request).ToString())).Result);
+            GetCarAmaduesRequest convertedRequest = (GetCarAmaduesRequest)ConvertRequest(request);
+            var resultFromHttp = Service.Client.PostAsync("url", new StringContent(convertedRequest.ToString())).Result;
+            // parse to response or move this logic into the ISerivceClient - Like Amadeus class in their project for example
+            GetCarAmaduesResponse rawResponse = new();
+            return ConvertResponse(rawResponse);
         }
     }
 }

@@ -9,30 +9,32 @@ using System.Threading.Tasks;
 
 namespace GenericServicePattern.Implementations.Yaya.Requesters
 {
-    class FixCarRequesterYaya : IRequester<bool, Car, IServiceClient<SomeWcfSoapClient>>
+    class FixCarRequesterYaya : Requester<bool, Car, IServiceClient<SomeWcfSoapClient>>
     {
-        public IServiceClient<SomeWcfSoapClient> Service { get; private set; }
-
         public FixCarRequesterYaya()
         {
             Service = new ServiceClientWcf();
         }
 
-        public Car ConvertRequest(object request)
+        protected override object ConvertRequest(Car request)
         {
+            FixCarYayaRequest req = new FixCarYayaRequest
+            {
+                MyProperty1 = 123
+            };
             // Some conversion
-            return new Car();
+            return req;
         }
 
-        public bool ConvertResponse(object response)
+        protected override bool ConvertResponse(object response)
         {
-            // Some Conversions
             return true;
         }
 
-        public object Execute(object request)
+        public override bool Execute(Car request)
         {
-            Service.Client.FixCars(ConvertRequest(request));
+            // Can use Convert response if needed. here there is no response (just an example)
+            Service.Client.FixCars((FixCarYayaRequest)ConvertRequest(request));
             return true;
         }
     }

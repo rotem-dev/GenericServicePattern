@@ -14,12 +14,12 @@ namespace GenericServicePattern.Implementations.Clients
 
         }
 
-        public List<Car> GetCars(object c)
+        public List<Car> GetCars(GetCarYayaRequest c)
         {
             return new List<Car>();
         }
 
-        public void FixCars(Car c)
+        public void FixCars(FixCarYayaRequest c)
         {
             Console.WriteLine("Car fixed.");
         }

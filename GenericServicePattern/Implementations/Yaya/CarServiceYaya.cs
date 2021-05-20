@@ -10,26 +10,12 @@ using System.Threading.Tasks;
 
 namespace GenericServicePattern.Implementations.Yaya
 {
-    public class CarServiceYaya : ICarService<IServiceClient<SomeWcfSoapClient>>
+    public class CarServiceYaya : CarService<IServiceClient<SomeWcfSoapClient>>
     {
         public CarServiceYaya()
         {
             FixCarRequester = new FixCarRequesterYaya();
             GetCarRequester = new GetCarRequesterYaya();
-        }
-
-        public IRequester<bool, Car, IServiceClient<SomeWcfSoapClient>> FixCarRequester { get; private set; }
-
-        public IRequester<Car, CarQuery, IServiceClient<SomeWcfSoapClient>> GetCarRequester { get; private set; }
-
-        public bool FixCar(Car car)
-        {
-            return (bool)FixCarRequester.Execute(car);
-        }
-
-        public Car GetCar(CarQuery query)
-        {
-            return (Car)GetCarRequester.Execute(query);
         }
     }
 }

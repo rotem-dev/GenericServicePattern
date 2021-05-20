@@ -9,30 +9,31 @@ using System.Threading.Tasks;
 
 namespace GenericServicePattern.Implementations.Yaya.Requesters
 {
-    public class GetCarRequesterYaya : IRequester<Car, CarQuery, IServiceClient<SomeWcfSoapClient>>
+    public class GetCarRequesterYaya : Requester<Car, CarQuery, IServiceClient<SomeWcfSoapClient>>
     {
-        public IServiceClient<SomeWcfSoapClient> Service { get; private set; }
-
         public GetCarRequesterYaya()
         {
             Service = new ServiceClientWcf();
         }
 
-        public CarQuery ConvertRequest(object request)
+        public override Car Execute(CarQuery request)
         {
+            return ConvertResponse(Service.Client.GetCars((GetCarYayaRequest)ConvertRequest(request)));
+        }
+
+        protected override object ConvertRequest(CarQuery request)
+        {
+            GetCarYayaRequest convertedRequest = new();
+            convertedRequest.MyProperty3 = request.Id;
             // Some Conversions
-            return new CarQuery();
+            return convertedRequest;
         }
 
-        public Car ConvertResponse(object response)
+        protected override Car ConvertResponse(object response)
         {
+            Car convertedResponse = new();// response.FirstOrDefault();
             // Some conversions...
-            return new Car();
-        }
-
-        public object Execute(object request)
-        {
-            return ConvertResponse(Service.Client.GetCars(ConvertRequest(request)).FirstOrDefault());
+            return convertedResponse;
         }
     }
 }

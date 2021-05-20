@@ -9,32 +9,35 @@ using System.Threading.Tasks;
 
 namespace GenericServicePattern.Implementations.Amadeus.Requesters
 {
-    public class FixCarRequesterAmadues : IRequester<bool, Car, IServiceClient<HttpClient>>
+    public class FixCarRequesterAmadues : Requester<bool, Car, IServiceClient<HttpClient>>
     {
-        public IServiceClient<HttpClient> Service { get; private set; }
-
         public FixCarRequesterAmadues(IServiceClient<HttpClient> service)
         {
             Service = service;
         }
 
-        public Car ConvertRequest(object request)
+        protected override object ConvertRequest(Car request)
         {
-            Car c = new Car();
+            FixCarAmaduesRequest c = new();
+            //c.Car = request.CarName;
             // Convert RawRequest to Car operations...
             return c;
         }
 
-        public bool ConvertResponse(object response)
+        protected override bool ConvertResponse(object response)
         {
-            bool result = false;
+            bool result = true; //response.CarId == 0;
             // Do needed operations to know about result from RawResponse
             return result;
         }
 
-        public object Execute(object request)
+        public override bool Execute(Car request)
         {
-            return ConvertResponse(Service.Client.PostAsync("url", new StringContent(ConvertRequest(request).ToString())).Result);
+            FixCarAmaduesRequest convertedRequest = (FixCarAmaduesRequest)ConvertRequest(request);
+            var resultFromHttp = Service.Client.PostAsync("url", new StringContent(convertedRequest.ToString())).Result;
+            // parse to response or move this logic into the ISerivceClient - Like Amadeus class in their project for example
+            FixCarAmaduesReponse rawResponse = new();
+            return ConvertResponse(rawResponse);
         }
     }
 }
