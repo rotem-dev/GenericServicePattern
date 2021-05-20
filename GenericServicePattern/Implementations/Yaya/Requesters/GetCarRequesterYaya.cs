@@ -19,10 +19,10 @@ namespace GenericServicePattern.Implementations.Yaya.Requesters
 
         public override Car Execute(CarQuery request)
         {
-            return ConvertResponse(Service.Client.GetCars((GetCarYayaRequest)ConvertRequest(request)));
+            return ConvertResponse(Service.Client.GetCars(ConvertRequest(request)));
         }
 
-        protected override object ConvertRequest(CarQuery request)
+        protected override GetCarYayaRequest ConvertRequest(CarQuery request)
         {
             GetCarYayaRequest convertedRequest = new();
             convertedRequest.MyProperty3 = request.Id;
@@ -30,7 +30,7 @@ namespace GenericServicePattern.Implementations.Yaya.Requesters
             return convertedRequest;
         }
 
-        protected override Car ConvertResponse(object response)
+        protected override Car ConvertResponse(dynamic response)
         {
             Car convertedResponse = new();// response.FirstOrDefault();
             // Some conversions...

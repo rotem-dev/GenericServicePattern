@@ -17,7 +17,7 @@ namespace GenericServicePattern.Implementations.Amadeus.Requesters
             Service = service;
         }
 
-        protected override object ConvertRequest(CarQuery request)
+        protected override GetCarAmaduesRequest ConvertRequest(CarQuery request)
         {
             GetCarAmaduesRequest query = new();
             //query.Car1 = request.SearchString;
@@ -25,7 +25,7 @@ namespace GenericServicePattern.Implementations.Amadeus.Requesters
             return query;
         }
 
-        protected override Car ConvertResponse(object response)
+        protected override Car ConvertResponse(dynamic response)
         {
             Car c = new();
             // Convert from object Raw response and return Car.
@@ -35,7 +35,7 @@ namespace GenericServicePattern.Implementations.Amadeus.Requesters
 
         public override Car Execute(CarQuery request)
         {
-            GetCarAmaduesRequest convertedRequest = (GetCarAmaduesRequest)ConvertRequest(request);
+            GetCarAmaduesRequest convertedRequest = ConvertRequest(request);
             var resultFromHttp = Service.Client.PostAsync("url", new StringContent(convertedRequest.ToString())).Result;
             // parse to response or move this logic into the ISerivceClient - Like Amadeus class in their project for example
             GetCarAmaduesResponse rawResponse = new();

@@ -17,7 +17,7 @@ namespace GenericServicePattern.Implementations.Yaya.Requesters
             Service = new ServiceClientWcf();
         }
 
-        protected override object ConvertRequest(Car request)
+        protected override FixCarYayaRequest ConvertRequest(Car request)
         {
             FixCarYayaRequest req = new FixCarYayaRequest
             {
@@ -27,15 +27,16 @@ namespace GenericServicePattern.Implementations.Yaya.Requesters
             return req;
         }
 
-        protected override bool ConvertResponse(object response)
+        protected override bool ConvertResponse(dynamic response)
         {
+            // return response.Something == 5;// Have to be sure something exists. Might throw an exception.
             return true;
         }
 
         public override bool Execute(Car request)
         {
             // Can use Convert response if needed. here there is no response (just an example)
-            Service.Client.FixCars((FixCarYayaRequest)ConvertRequest(request));
+            Service.Client.FixCars(ConvertRequest(request));
             return true;
         }
     }
